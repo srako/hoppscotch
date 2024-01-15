@@ -18,6 +18,10 @@ const AuthProviderConfigurations = {
     InfraConfigEnum.GITHUB_CLIENT_ID,
     InfraConfigEnum.GITHUB_CLIENT_SECRET,
   ],
+  [AuthProvider.OIDC]: [
+    InfraConfigEnum.OIDC_CLIENT_ID,
+    InfraConfigEnum.OIDC_CLIENT_SECRET,
+  ],
   [AuthProvider.MICROSOFT]: [
     InfraConfigEnum.MICROSOFT_CLIENT_ID,
     InfraConfigEnum.MICROSOFT_CLIENT_SECRET,

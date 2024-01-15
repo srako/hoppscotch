@@ -16,7 +16,7 @@ import {
 } from '~/helpers/backend/graphql';
 
 // Types
-export type SsoAuthProviders = 'google' | 'microsoft' | 'github';
+export type SsoAuthProviders = 'google' | 'microsoft' | 'github' | 'oidc';
 
 export type Config = {
   providers: {
@@ -29,6 +29,14 @@ export type Config = {
       };
     };
     github: {
+      name: SsoAuthProviders;
+      enabled: boolean;
+      fields: {
+        client_id: string;
+        client_secret: string;
+      };
+    };
+    oidc: {
       name: SsoAuthProviders;
       enabled: boolean;
       fields: {
@@ -82,6 +90,8 @@ export function useConfigHandler(updatedConfigs?: Config) {
       'MICROSOFT_CLIENT_SECRET',
       'GITHUB_CLIENT_ID',
       'GITHUB_CLIENT_SECRET',
+      'OIDC_CLIENT_ID',
+      'OIDC_CLIENT_SECRET',
       'MAILER_SMTP_URL',
       'MAILER_ADDRESS_FROM',
     ] as InfraConfigEnum[],
@@ -131,6 +141,18 @@ export function useConfigHandler(updatedConfigs?: Config) {
                 ?.value ?? '',
             client_secret:
               infraConfigs.value.find((x) => x.name === 'GITHUB_CLIENT_SECRET')
+                ?.value ?? '',
+          },
+        },
+        oidc: {
+          name: 'oidc',
+          enabled: allowedAuthProviders.value.includes('OIDC'),
+          fields: {
+            client_id:
+              infraConfigs.value.find((x) => x.name === 'OIDC_CLIENT_ID')
+                ?.value ?? '',
+            client_secret:
+              infraConfigs.value.find((x) => x.name === 'OIDC_CLIENT_SECRET')
                 ?.value ?? '',
           },
         },

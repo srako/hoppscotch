@@ -89,7 +89,7 @@ const capitalize = (text: string) =>
 // Masking sensitive fields
 type Field = {
   name: string;
-  key: keyof Config['providers']['google' | 'github' | 'microsoft']['fields'];
+  key: keyof Config['providers']['google' | 'github' | 'microsoft' | 'oidc']['fields'];
 };
 
 const providerConfigFields = reactive<Field[]>([
@@ -106,6 +106,10 @@ const maskState = reactive({
     client_id: true,
     client_secret: true,
   },
+  oidc: {
+    client_id: true,
+    client_secret: true,
+  },
   microsoft: {
     client_id: true,
     client_secret: true,
@@ -117,6 +121,7 @@ const toggleMask = (
   fieldKey: keyof Config['providers'][
     | 'google'
     | 'github'
+    | 'oidc'
     | 'microsoft']['fields']
 ) => {
   maskState[provider][fieldKey] = !maskState[provider][fieldKey];

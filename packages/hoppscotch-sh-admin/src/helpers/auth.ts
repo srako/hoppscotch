@@ -25,6 +25,11 @@ export type HoppUser = {
   /** URL to the profile picture of the user */
   photoURL: string | null;
 
+  // Regarding `provider` and `accessToken`:
+  // The current implementation and use case for these 2 fields are super weird due to legacy.
+  // Currrently these fields are only basically populated for Github Auth as we need the access token issued
+  // by it to implement Gist submission. I would really love refactor to make this thing more sane.
+
   /** Name of the provider authenticating (NOTE: See notes on `platform/auth.ts`) */
   provider?: string;
   /** Access Token for the auth of the user against the given `provider`. */
@@ -167,6 +172,12 @@ export const auth = {
     const urlObject = new URL(url);
     const searchParams = new URLSearchParams(urlObject.search);
     return Boolean(searchParams.get('token'));
+  },
+
+  signInUserWithOidc: () => {
+    window.location.href = `${
+      import.meta.env.VITE_BACKEND_API_URL
+    }/auth/oidc?redirect_uri=${import.meta.env.VITE_ADMIN_URL}`;
   },
 
   signInUserWithGoogle: () => {

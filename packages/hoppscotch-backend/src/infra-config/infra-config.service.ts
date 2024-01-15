@@ -62,6 +62,14 @@ export class InfraConfigService implements OnModuleInit {
         value: process.env.GITHUB_CLIENT_SECRET,
       },
       {
+        name: InfraConfigEnum.OIDC_CLIENT_ID,
+        value: process.env.OIDC_CLIENT_ID,
+      },
+      {
+        name: InfraConfigEnum.OIDC_CLIENT_SECRET,
+        value: process.env.OIDC_CLIENT_SECRET,
+      },
+      {
         name: InfraConfigEnum.MICROSOFT_CLIENT_ID,
         value: process.env.MICROSOFT_CLIENT_ID,
       },
@@ -212,6 +220,8 @@ export class InfraConfigService implements OnModuleInit {
         return configMap.GOOGLE_CLIENT_ID && configMap.GOOGLE_CLIENT_SECRET;
       case AuthProvider.GITHUB:
         return configMap.GITHUB_CLIENT_ID && configMap.GITHUB_CLIENT_SECRET;
+      case AuthProvider.OIDC:
+        return configMap.OIDC_CLIENT_ID && configMap.OIDC_CLIENT_SECRET;
       case AuthProvider.MICROSOFT:
         return (
           configMap.MICROSOFT_CLIENT_ID && configMap.MICROSOFT_CLIENT_SECRET
