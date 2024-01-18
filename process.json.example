@@ -1,0 +1,26 @@
+{
+  "apps": [
+    {
+      "name": "hoppscotch",
+      "cwd": "/data/www/hoppscotch",
+      "script": "packages/hoppscotch-backend/dist/main.js",
+      "log_date_format": "YYYY-MM-DD HH:mm Z",
+      "error_file": "/data/logs/pm2/hoppscotch.stderr.log",
+      "out_file": "/data/logs/pm2/hoppscotch.stdout.log",
+      "pid_file": "pids/hoppscotch-backend.pid",
+      "instances": 1,
+      "min_uptime": "200s",
+      "max_restarts": 10,
+      "watch": false,
+      "merge_logs": true,
+      "exec_interpreter": "node",
+      "exec_mode": "fork",
+      "autorestart": false,
+      "vizion": false,
+      "env":{
+        "NODE_ENV": "production",
+        "TZ":"Asia/Shanghai"
+      }
+    }
+  ]
+}
